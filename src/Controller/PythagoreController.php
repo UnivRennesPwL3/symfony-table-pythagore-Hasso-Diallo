@@ -2,17 +2,17 @@
  
 namespace App\Controller;
  
-use App\Service\Code;  
+use App\Service\PythagoreUtility;  
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
  
-class TableDePythagoreController extends AbstractController
+class PythagoreController extends AbstractController
 {
-    private $pythagore;
+    private PythagoreUtility $pythagore;
  
    
-    public function __construct(Code $pythagore)
+    public function __construct(PythagoreUtility $pythagore)
     {
         $this->pythagore = $pythagore;  
     }
@@ -21,11 +21,8 @@ class TableDePythagoreController extends AbstractController
     #[Route('/pythagore/view', name: 'pythagore_view')]
     public function displayPythagoreAction(): Response
     {
-       
-        $pythagoreTable = $this->pythagore->display();
- 
         return $this->render('displayPythagore.html.twig', [
-            'pythagoreTable' => $pythagoreTable,  
+            'pythagoreTable' => $this->pythagore->display(),  
         ]);
     }
 }
